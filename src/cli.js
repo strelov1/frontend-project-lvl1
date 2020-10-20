@@ -1,8 +1,11 @@
-import promptly from 'promptly';
+import greeting from './greeting.js';
+import runBrainEvenGame from './brain-even.js';
 
-export default async () => {
-  console.log('Welcome to the Brain Games!');
-  const name = await promptly.prompt('May I have your name? ');
+export const brainGame = async () => {
+  await greeting();
+};
 
-  console.log(`Hello, ${name}!`);
+export const brainEven = async () => {
+  const name = await greeting();
+  await runBrainEvenGame(name);
 };
