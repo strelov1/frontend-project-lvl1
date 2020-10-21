@@ -1,6 +1,6 @@
-import runBrainGame from './brain-games.js';
-import runBrainEvenGame from './brain-even.js';
-import runBrainCalcGame from './brain-calc.js';
+import runBrainGame from './games/brain-games.js';
+import runBrainEvenGame from './games/brain-even.js';
+import runBrainCalcGame from './games/brain-calc.js';
 
 export const brainGames = async () => {
   await runBrainGame.run();

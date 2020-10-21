@@ -1,5 +1,5 @@
 import promptly from 'promptly';
-import Engine from './engine.js';
+import Engine from '../index.js';
 
 export const greeting = async () => {
   console.log('Welcome to the Brain Games!');
