@@ -11,6 +11,20 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
 
 export const generateRandomOperation = () => getRandomElement(['+', '-', '*']);
 
+export const isPrime = (num) => {
+  if (num <= 0) {
+    return false;
+  }
+
+  // eslint-disable-next-line no-bitwise
+  const isInteger = (n) => (n ^ 0) === n;
+
+  return generateProgression(2, num - 2)
+    .map((item) => (num / item))
+    .filter(isInteger)
+    .length === 0;
+};
+
 export const calculate = (num1, num2, operation) => {
   switch (operation) {
     case '+':
