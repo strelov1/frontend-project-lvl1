@@ -1,11 +1,15 @@
-import greeting from './greeting.js';
+import runBrainGame from './brain-games.js';
 import runBrainEvenGame from './brain-even.js';
+import runBrainCalcGame from './brain-calc.js';
 
-export const brainGame = async () => {
-  await greeting();
+export const brainGames = async () => {
+  await runBrainGame.run();
 };
 
-export const brainEven = async () => {
-  const name = await greeting();
-  await runBrainEvenGame(name);
+export const brainEvenGame = async () => {
+  await runBrainEvenGame.run();
+};
+
+export const brainCalcGame = async () => {
+  await runBrainCalcGame.run();
 };

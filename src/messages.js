@@ -6,4 +6,10 @@ export const successGameMessage = (name) => {
   console.log(`Congratulations, ${name}!`);
 };
 
-export const errorMessage = (userAnswer, correctAnswer) => `'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`;
+export const correctMessage = () => {
+  console.log('Correct!');
+};
+
+export const failMessage = (question, answer) => {
+  console.log(`'${answer}' is wrong answer ;(. Correct answer was '${question}'.`);
+};

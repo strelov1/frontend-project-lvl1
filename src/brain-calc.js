@@ -2,17 +2,27 @@ import promptly from 'promptly';
 import Engine, { failGame, successGame } from './engine.js';
 import * as messages from './messages.js';
 import { greeting } from './brain-games.js';
-import { generateRandomNumber, isEven } from './utils.js';
+import { generateRandomNumber, generateRandomOpoeration, caluclate } from './utils.js';
 
 const userQuestion = async () => {
-  const question = generateRandomNumber();
-  console.log(`Question: ${question}`);
-  return isEven(question) ? 'yes' : 'no';
+  const num1 = generateRandomNumber();
+  const num2 = generateRandomNumber();
+
+  const operation = generateRandomOpoeration();
+
+  console.log(`Question: ${num1} ${operation} ${num2}`);
+
+  return caluclate(num1, num2, operation);
 };
 
 const userAnswer = () => promptly.prompt('Your answer:');
 
-const condition = (question, answer) => question === answer;
+const condition = (question, answer) => {
+  if (question === Number(answer)) {
+    return true;
+  }
+  return false;
+};
 
 const gameConditions = {
   question: userQuestion,
@@ -26,7 +36,7 @@ const gameConditions = {
 export default new Engine({
   greeting: async () => {
     const name = await greeting();
-    console.log('Answer "yes" if the number is even, otherwise answer "no".');
+    console.log('What is the result of the expression?');
     return name;
   },
   rules: [
