@@ -2,17 +2,17 @@ import promptly from 'promptly';
 import Engine, { failGame, successGame } from '../index.js';
 import * as messages from '../messages.js';
 import { greeting } from './brain-games.js';
-import { generateRandomNumber, generateRandomOpoeration, caluclate } from '../utils.js';
+import { generateRandomNumber, generateRandomOperation, calculate } from '../utils.js';
 
 const userQuestion = async () => {
   const num1 = generateRandomNumber();
   const num2 = generateRandomNumber();
 
-  const operation = generateRandomOpoeration();
+  const operation = generateRandomOperation();
 
   console.log(`Question: ${num1} ${operation} ${num2}`);
 
-  return caluclate(num1, num2, operation);
+  return calculate(num1, num2, operation);
 };
 
 const userAnswer = () => promptly.prompt('Your answer:');

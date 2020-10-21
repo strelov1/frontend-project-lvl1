@@ -2,15 +2,23 @@ import promptly from 'promptly';
 import Engine, { failGame, successGame } from '../index.js';
 import * as messages from '../messages.js';
 import { greeting } from './brain-games.js';
-import { generateRandomNumber, calculateGcd } from '../utils.js';
+import {
+  generateProgression,
+  generateRandomNumber,
+  getRandomElement,
+  arrayReplaceValue,
+} from '../utils.js';
 
 const userQuestion = async () => {
-  const num1 = generateRandomNumber();
-  const num2 = generateRandomNumber();
+  const progression = generateProgression(generateRandomNumber(), 10);
 
-  console.log(`Question: ${num1} ${num2}`);
+  const element = getRandomElement(progression);
 
-  return calculateGcd(num1, num2);
+  const replacedProgression = arrayReplaceValue(progression, element, '..');
+
+  console.log(`Question: ${replacedProgression.join(' ')}`);
+
+  return element;
 };
 
 const userAnswer = () => promptly.prompt('Your answer:');
@@ -29,7 +37,7 @@ const gameConditions = {
 export default new Engine({
   greeting: async () => {
     const name = await greeting();
-    console.log('Find the greatest common divisor of given numbers.');
+    console.log('What number is missing in the progression?');
     return name;
   },
   rules: [
