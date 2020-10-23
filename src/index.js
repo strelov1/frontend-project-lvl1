@@ -16,32 +16,35 @@ export const failMessage = (question, answer) => {
   console.log(`'${answer}' is wrong answer ;(. Correct answer was '${question}'.`);
 };
 
-
+/**
+ * Обобщение игровых правил
+ * @param {ConfigureGameProps} param0 
+ */
 const configureGame = ({gameName, gameConditions}) => {
-  const commonGameConditions  = {
+  const commonGameConditions = {
     ...gameConditions, 
-    onFailStep: FAIL_GAME_STEP,
-    onSuccess: correctMessage,
-    onFail: failMessage,
+    failStep: FAIL_GAME_STEP,
+    onSuccessStep: correctMessage,
+    onFailStep: failMessage,
   };
   return new Engine({
-    greeting: async () => {
+    gameGreeting: async () => {
       console.log(gameName);
     },
     rules: [
       {
         name: 'one',
-        onSuccessStep: 'two',
+        successStep: 'two',
         ...commonGameConditions,
       },
       {
         name: 'two',
-        onSuccessStep: 'three',
+        successStep: 'three',
         ...commonGameConditions,
       },
       {
         name: 'three',
-        onSuccessStep: SUCCESS_GAME_STEP,
+        successStep: SUCCESS_GAME_STEP,
         ...commonGameConditions,
       },
     ],
