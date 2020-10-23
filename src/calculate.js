@@ -11,7 +11,6 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
 
 export const generateRandomOperation = () => getRandomElement(['+', '-', '*']);
 
-
 // eslint-disable-next-line no-bitwise
 const isInteger = (n) => (n ^ 0) === n;
 

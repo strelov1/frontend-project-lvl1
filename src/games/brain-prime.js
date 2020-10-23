@@ -17,12 +17,12 @@ const condition = (question, answer) => question === answer;
 const createGame = configureGame(
   {
     gameName: 'Answer "yes" if given number is prime. Otherwise answer "no".',
-    gameConditions:  {
+    gameConditions: {
       question: userQuestion,
       answer: userAnswer,
       condition,
-    }
-  }
+    },
+  },
 );
 
 export default createGame;

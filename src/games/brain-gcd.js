@@ -18,12 +18,12 @@ const condition = (question, answer) => question === Number(answer);
 const createGame = configureGame(
   {
     gameName: 'Find the greatest common divisor of given numbers.',
-    gameConditions:  {
+    gameConditions: {
       question: userQuestion,
       answer: userAnswer,
       condition,
-    }
-  }
+    },
+  },
 );
 
 export default createGame;

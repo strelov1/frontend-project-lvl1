@@ -24,12 +24,12 @@ const condition = (question, answer) => question === Number(answer);
 const createGame = configureGame(
   {
     gameName: 'What number is missing in the progression?',
-    gameConditions:  {
+    gameConditions: {
       question: userQuestion,
       answer: userAnswer,
       condition,
-    }
-  }
+    },
+  },
 );
 
 export default createGame;

@@ -2,7 +2,6 @@ export const SUCCESS_GAME_STEP = 'SUCCESS_GAME_STEP';
 export const FAIL_GAME_STEP = 'FAIL_GAME_STEP';
 
 class Engine {
-  
   /**
   * @param {EngineConstrutor}
   */
@@ -43,7 +42,7 @@ class Engine {
 
         return loop(currentStep.successStep);
       }
-      
+
       await currentStep.onFail(question, answer);
 
       return loop(currentStep.onFailStep);

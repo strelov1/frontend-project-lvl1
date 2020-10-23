@@ -15,12 +15,12 @@ const condition = (question, answer) => question === answer;
 const game = configureGame(
   {
     gameName: 'Answer "yes" if the number is even, otherwise answer "no".',
-    gameConditions:  {
+    gameConditions: {
       question: userQuestion,
       answer: userAnswer,
-      condition: condition,
-    }
-  }
+      condition,
+    },
+  },
 );
 
 export default game;

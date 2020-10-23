@@ -1,4 +1,4 @@
-import Engine, { FAIL_GAME_STEP, SUCCESS_GAME_STEP } from "./engine.js";
+import Engine, { FAIL_GAME_STEP, SUCCESS_GAME_STEP } from './engine.js';
 
 export const failGameMessage = (name) => {
   console.log(`Let's try again, ${name}!`);
@@ -18,11 +18,11 @@ export const failMessage = (question, answer) => {
 
 /**
  * Обобщение игровых правил
- * @param {ConfigureGameProps} param0 
+ * @param {ConfigureGameProps} param0
  */
-const configureGame = ({gameName, gameConditions}) => {
+const configureGame = ({ gameName, gameConditions }) => {
   const commonGameConditions = {
-    ...gameConditions, 
+    ...gameConditions,
     failStep: FAIL_GAME_STEP,
     onSuccessStep: correctMessage,
     onFailStep: failMessage,
@@ -51,6 +51,6 @@ const configureGame = ({gameName, gameConditions}) => {
     onFailGame: failGameMessage,
     onFinishGame: finishGameMessage,
   });
-}
+};
 
 export default configureGame;
