@@ -1,8 +1,6 @@
 import promptly from 'promptly';
-import Engine, { failGame, successGame } from '../index.js';
-import * as messages from '../messages.js';
-import { greeting } from './brain-games.js';
-import { generateRandomNumber, calculateGcd } from '../utils.js';
+import configureGame from '../index.js';
+import { generateRandomNumber, calculateGcd } from '../calculate.js';
 
 const userQuestion = async () => {
   const num1 = generateRandomNumber();
@@ -17,38 +15,15 @@ const userAnswer = () => promptly.prompt('Your answer:');
 
 const condition = (question, answer) => question === Number(answer);
 
-const gameConditions = {
-  question: userQuestion,
-  answer: userAnswer,
-  condition,
-  onSuccess: messages.correctMessage,
-  onFail: messages.failMessage,
-  fail: failGame,
-};
+const createGame = configureGame(
+  {
+    gameName: 'Find the greatest common divisor of given numbers.',
+    gameConditions:  {
+      question: userQuestion,
+      answer: userAnswer,
+      condition,
+    }
+  }
+);
 
-export default new Engine({
-  greeting: async () => {
-    const name = await greeting();
-    console.log('Find the greatest common divisor of given numbers.');
-    return name;
-  },
-  rules: [
-    {
-      name: 'one',
-      success: 'two',
-      ...gameConditions,
-    },
-    {
-      name: 'two',
-      success: 'three',
-      ...gameConditions,
-    },
-    {
-      name: 'three',
-      success: successGame,
-      ...gameConditions,
-    },
-  ],
-  fail: messages.failGameMessage,
-  finish: messages.successGameMessage,
-});
+export default createGame;

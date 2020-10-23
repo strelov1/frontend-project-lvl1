@@ -1,4 +1,4 @@
-import runBrainGame from './games/brain-games.js';
+import greeting from './games/greeting.js';
 import runBrainEvenGame from './games/brain-even.js';
 import runBrainCalcGame from './games/brain-calc.js';
 import runBrainGcdGame from './games/brain-gcd.js';
@@ -6,25 +6,30 @@ import runBrainProgressionGame from './games/brain-progression.js';
 import runBrainPrimeGame from './games/brain-prime.js';
 
 export const brainGames = async () => {
-  await runBrainGame.run();
+  await greeting();
 };
 
 export const brainEvenGame = async () => {
-  await runBrainEvenGame.run();
+  const name = await greeting();
+  await runBrainEvenGame.run(name);
 };
 
 export const brainCalcGame = async () => {
-  await runBrainCalcGame.run();
+  const name = await greeting();
+  await runBrainCalcGame.run(name);
 };
 
 export const brainGcdGame = async () => {
-  await runBrainGcdGame.run();
+  const name = await greeting();
+  await runBrainGcdGame.run(name);
 };
 
 export const brainProgressionGame = async () => {
-  await runBrainProgressionGame.run();
+  const name = await greeting();
+  await runBrainProgressionGame.run(name);
 };
 
 export const brainPrimeGame = async () => {
-  await runBrainPrimeGame.run();
+  const name = await greeting();
+  await runBrainPrimeGame.run(name);
 };

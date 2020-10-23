@@ -1,48 +1,53 @@
-export const successGame = 'success';
-export const failGame = 'finish';
+import Engine, { FAIL_GAME_STEP, SUCCESS_GAME_STEP } from "./engine.js";
 
-class Engine {
-  constructor({
-    greeting, rules, finish, fail,
-  }) {
-    this.greeting = greeting;
-    this.rules = rules;
-    this.finish = finish;
-    this.fail = fail;
-  }
+export const failGameMessage = (name) => {
+  console.log(`Let's try again, ${name}!`);
+};
 
-  getStep(step) {
-    return this.rules.find((item) => item.name === step);
-  }
+export const finishGameMessage = (name) => {
+  console.log(`Congratulations, ${name}!`);
+};
 
-  async run() {
-    const name = await this.greeting();
+export const correctMessage = () => {
+  console.log('Correct!');
+};
 
-    const loop = async (step) => {
-      if (step === failGame) {
-        return this.fail(name);
-      }
-      if (step === successGame) {
-        return this.finish(name);
-      }
+export const failMessage = (question, answer) => {
+  console.log(`'${answer}' is wrong answer ;(. Correct answer was '${question}'.`);
+};
 
-      const currentStep = this.getStep(step);
 
-      const question = await currentStep.question();
-      const answer = await currentStep.answer();
-
-      if (currentStep.condition(question, answer)) {
-        await currentStep.onSuccess(question, answer);
-        return loop(currentStep.success);
-      }
-      await currentStep.onFail(question, answer);
-      return loop(currentStep.fail);
-    };
-
-    if (this.rules && this.rules.length) {
-      loop(this.rules[0].name);
-    }
-  }
+const configureGame = ({gameName, gameConditions}) => {
+  const commonGameConditions  = {
+    ...gameConditions, 
+    onFailStep: FAIL_GAME_STEP,
+    onSuccess: correctMessage,
+    onFail: failMessage,
+  };
+  return new Engine({
+    greeting: async () => {
+      console.log(gameName);
+    },
+    rules: [
+      {
+        name: 'one',
+        onSuccessStep: 'two',
+        ...commonGameConditions,
+      },
+      {
+        name: 'two',
+        onSuccessStep: 'three',
+        ...commonGameConditions,
+      },
+      {
+        name: 'three',
+        onSuccessStep: SUCCESS_GAME_STEP,
+        ...commonGameConditions,
+      },
+    ],
+    onFailGame: failGameMessage,
+    onFinishGame: finishGameMessage,
+  });
 }
 
-export default Engine;
+export default configureGame;
