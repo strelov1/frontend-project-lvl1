@@ -6,12 +6,12 @@ class Engine {
   * @param {EngineConstrutor}
   */
   constructor({
-    greeting,
+    gameGreeting,
     rules,
     onFinishGame,
     onFailGame,
   }) {
-    this.greeting = greeting;
+    this.gameGreeting = gameGreeting;
     this.rules = rules;
     this.onFinishGame = onFinishGame;
     this.onFailGame = onFailGame;
@@ -21,15 +21,15 @@ class Engine {
     return this.rules.find((item) => item.name === step);
   }
 
-  async run(name) {
+  async run(userName) {
     await this.gameGreeting();
 
     const loop = async (step) => {
       if (step === SUCCESS_GAME_STEP) {
-        return this.onFinishGame(name);
+        return this.onFinishGame(userName);
       }
       if (step === FAIL_GAME_STEP) {
-        return this.onFailGame(name);
+        return this.onFailGame(userName);
       }
 
       const currentStep = this.getStep(step);
@@ -43,9 +43,9 @@ class Engine {
         return loop(currentStep.successStep);
       }
 
-      await currentStep.onFail(question, answer);
+      await currentStep.onFailStep(question, answer);
 
-      return loop(currentStep.onFailStep);
+      return loop(currentStep.failStep);
     };
 
     if (this.rules && this.rules.length) {

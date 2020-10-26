@@ -10,26 +10,26 @@ export const brainGames = async () => {
 };
 
 export const brainEvenGame = async () => {
-  const name = await greeting();
-  await runBrainEvenGame.run(name);
+  const userName = await greeting();
+  await runBrainEvenGame.run(userName);
 };
 
 export const brainCalcGame = async () => {
-  const name = await greeting();
-  await runBrainCalcGame.run(name);
+  const userName = await greeting();
+  await runBrainCalcGame.run(userName);
 };
 
 export const brainGcdGame = async () => {
-  const name = await greeting();
-  await runBrainGcdGame.run(name);
+  const userName = await greeting();
+  await runBrainGcdGame.run(userName);
 };
 
 export const brainProgressionGame = async () => {
-  const name = await greeting();
-  await runBrainProgressionGame.run(name);
+  const userName = await greeting();
+  await runBrainProgressionGame.run(userName);
 };
 
 export const brainPrimeGame = async () => {
-  const name = await greeting();
-  await runBrainPrimeGame.run(name);
+  const userName = await greeting();
+  await runBrainPrimeGame.run(userName);
 };
