@@ -18,7 +18,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-test('greeting', async () => {
+test('greeting', async (done) => {
   const userName = 'TEST_NAME';
   sendLine(userName);
   const value = await greeting();
@@ -28,4 +28,7 @@ test('greeting', async () => {
   expect(console.log).toHaveBeenCalledWith('Welcome to the Brain Games!');
   expect(process.stdout.write).toHaveBeenCalledWith('May I have your name? ');
   expect(console.log).toHaveBeenCalledWith(`Hello, ${userName}!`);
+
+  done();
+
 });
