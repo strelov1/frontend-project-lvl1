@@ -1,4 +1,4 @@
-import Engine, { FAIL_GAME_STEP, SUCCESS_GAME_STEP } from './engine.js';
+import engine, { FAIL_GAME_STEP, SUCCESS_GAME_STEP } from './engine.js';
 
 export const failGameMessage = (name) => {
   console.log(`Let's try again, ${name}!`);
@@ -27,7 +27,7 @@ const configureGame = ({ gameName, gameConditions, gameSettings }) => {
     onFailStep: failMessage,
     ...gameConditions,
   };
-  return new Engine({
+  return engine({
     gameGreeting: async () => {
       console.log(gameName);
     },

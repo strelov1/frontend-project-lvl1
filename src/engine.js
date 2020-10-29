@@ -1,38 +1,29 @@
 export const SUCCESS_GAME_STEP = 'SUCCESS_GAME_STEP';
 export const FAIL_GAME_STEP = 'FAIL_GAME_STEP';
 
-class Engine {
-  /**
-  * @param {EngineConstrutor}
-  */
-  constructor({
-    gameGreeting,
-    rules,
-    onFinishGame,
-    onFailGame,
-  }) {
-    this.gameGreeting = gameGreeting;
-    this.rules = rules;
-    this.onFinishGame = onFinishGame;
-    this.onFailGame = onFailGame;
-  }
+/**
+* @param {EngineConstrutor}
+*/
+const engine = ({
+  gameGreeting,
+  rules,
+  onFinishGame,
+  onFailGame,
+}) => {
+  const getStep = (step) => rules.find((item) => item.name === step);
 
-  getStep(step) {
-    return this.rules.find((item) => item.name === step);
-  }
-
-  async run(userName) {
-    await this.gameGreeting();
+  const run = async (userName) => {
+    await gameGreeting();
 
     const loop = async (step) => {
       if (step === SUCCESS_GAME_STEP) {
-        return this.onFinishGame(userName);
+        return onFinishGame(userName);
       }
       if (step === FAIL_GAME_STEP) {
-        return this.onFailGame(userName);
+        return onFailGame(userName);
       }
 
-      const currentStep = this.getStep(step);
+      const currentStep = getStep(step);
 
       const question = await currentStep.question();
       const answer = await currentStep.answer();
@@ -48,10 +39,14 @@ class Engine {
       return loop(currentStep.failStep);
     };
 
-    if (this.rules && this.rules.length) {
-      loop(this.rules[0].name);
+    if (rules && rules.length) {
+      loop(rules[0].name);
     }
-  }
-}
+  };
 
-export default Engine;
+  return {
+    run,
+  };
+};
+
+export default engine;
