@@ -20,12 +20,12 @@ export const failMessage = (question, answer) => {
  * Обобщение игровых правил
  * @param {ConfigureGameProps} param0
  */
-const configureGame = ({ gameName, gameConditions }) => {
+const configureGame = ({ gameName, gameConditions, gameSettings }) => {
   const commonGameConditions = {
-    ...gameConditions,
     failStep: FAIL_GAME_STEP,
     onSuccessStep: correctMessage,
     onFailStep: failMessage,
+    ...gameConditions,
   };
   return new Engine({
     gameGreeting: async () => {
@@ -50,6 +50,7 @@ const configureGame = ({ gameName, gameConditions }) => {
     ],
     onFailGame: failGameMessage,
     onFinishGame: finishGameMessage,
+    ...gameSettings,
   });
 };
 
