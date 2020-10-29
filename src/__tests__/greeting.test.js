@@ -3,7 +3,9 @@
 import { jest, afterEach } from '@jest/globals';
 import greeting from '../games/greeting.js';
 
-jest.setTimeout(30000);
+jest.setTimeout(50000);
+jest.useFakeTimers();
+
 
 const sendLine = (line, delay = 0) => {
   if (!delay) {
@@ -20,17 +22,17 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-test('greeting', async (done) => {
+test('greeting', async () => {
   const userName = 'TEST_NAME';
   sendLine(userName);
   const value = await greeting();
 
   expect(value).toBe(userName);
+  
+  jest.runAllTimers();
 
   expect(console.log).toHaveBeenCalledWith('Welcome to the Brain Games!');
   expect(process.stdout.write).toHaveBeenCalledWith('May I have your name? ');
   expect(console.log).toHaveBeenCalledWith(`Hello, ${userName}!`);
-
-  done();
 
 });
