@@ -3,6 +3,8 @@
 import { jest, afterEach } from '@jest/globals';
 import greeting from '../games/greeting.js';
 
+jest.setTimeout(30000);
+
 const sendLine = (line, delay = 0) => {
   if (!delay) {
     setImmediate(() => process.stdin.emit('data', `${line}\n`));

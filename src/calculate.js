@@ -1,4 +1,4 @@
-export const generateRandomNumber = () => Math.floor(Math.random() * 10);
+export const generateRandomNumber = () => Math.floor(Math.random() * 10) + 1; 
 
 export const generateProgression = (start, num) => Array.from({ length: num }, (x, i) => start + i);
 

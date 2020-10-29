@@ -11,5 +11,6 @@
 * brain-games https://asciinema.org/a/LFXwpQ1UtrNusaVn2Z5SBwfYC
 * brain-even https://asciinema.org/a/UEhrRkvW6UsGG9K2R2kwUe04L
 * brain-calc https://asciinema.org/a/rovyFCsqaklMbXcqZB9cIzQkw
+* brain-gcd https://asciinema.org/a/UCgSO1a0nTkb1NZXbfdJd0Tgt
 
 * run test https://asciinema.org/a/elrBjDKmGkUK46ewv4yavQK50
