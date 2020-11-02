@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { jest, afterEach } from '@jest/globals';
-import { isEven } from '../calculate.js';
+import { isEven } from '../src/games/brain-even.js';
 
 afterEach(() => {
   jest.clearAllMocks();

@@ -12,6 +12,8 @@ const engine = ({
 }) => {
   const getStep = (step) => rules.find((item) => item.name === step);
 
+  const condition = (question, answer) => question === answer;
+
   const run = async (userName) => {
     await gameGreeting();
 
@@ -28,7 +30,7 @@ const engine = ({
       const question = await currentStep.question();
       const answer = await currentStep.answer();
 
-      if (currentStep.condition(question, answer)) {
+      if (condition(question, answer)) {
         await currentStep.onSuccessStep(question, answer);
 
         return loop(currentStep.successStep);

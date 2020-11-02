@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { jest, afterEach } from '@jest/globals';
-import { calculateGcd } from '../calculate.js';
+import { calculateGcd } from '../src/games/brain-gcd.js';
 
 afterEach(() => {
   jest.clearAllMocks();

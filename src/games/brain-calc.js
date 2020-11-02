@@ -1,10 +1,21 @@
 import promptly from 'promptly';
 import configureGame from '../index.js';
-import {
-  generateRandomNumber,
-  generateRandomOperation,
-  calculate,
-} from '../calculate.js';
+import { generateRandomNumber, getRandomElement } from '../utils.js';
+
+export const generateRandomOperation = () => getRandomElement(['+', '-', '*']);
+
+export const calculate = (num1, num2, operation) => {
+  switch (operation) {
+    case '+':
+      return num1 + num2;
+    case '-':
+      return num1 - num2;
+    case '*':
+      return num1 * num2;
+    default:
+      throw Error('Wrong operation');
+  }
+};
 
 const userQuestion = async () => {
   const num1 = generateRandomNumber();
@@ -18,15 +29,12 @@ const userQuestion = async () => {
 
 const userAnswer = () => promptly.prompt('Your answer:');
 
-const condition = (question, answer) => question === Number(answer);
-
 const createGame = configureGame(
   {
     gameName: 'What is the result of the expression?',
     gameConditions: {
       question: userQuestion,
       answer: userAnswer,
-      condition,
     },
   },
 );

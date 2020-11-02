@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { jest, afterEach } from '@jest/globals';
-import { isPrime } from '../calculate.js';
+import { isPrime } from '../src/games/brain-prime.js';
 
 afterEach(() => {
   jest.clearAllMocks();

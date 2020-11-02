@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { jest, afterEach } from '@jest/globals';
-import configureGame from '../index.js';
+import configureGame from '../src/index.js';
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
 

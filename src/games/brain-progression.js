@@ -1,14 +1,18 @@
 import promptly from 'promptly';
 import configureGame from '../index.js';
 import {
-  generateProgression,
   generateRandomNumber,
   getRandomElement,
-  arrayReplaceValue,
-} from '../calculate.js';
+  range,
+} from '../utils.js';
+
+// eslint-disable-next-line arrow-body-style
+export const arrayReplaceValue = (array, searchValue, replaceValue) => {
+  return array.map((item) => (item === searchValue ? replaceValue : item));
+};
 
 const userQuestion = async () => {
-  const progression = generateProgression(generateRandomNumber(), 10);
+  const progression = range(generateRandomNumber(), 10);
   const element = getRandomElement(progression);
   const replacedProgression = arrayReplaceValue(progression, element, '..');
 
@@ -19,15 +23,12 @@ const userQuestion = async () => {
 
 const userAnswer = () => promptly.prompt('Your answer:');
 
-const condition = (question, answer) => question === Number(answer);
-
 const createGame = configureGame(
   {
     gameName: 'What number is missing in the progression?',
     gameConditions: {
       question: userQuestion,
       answer: userAnswer,
-      condition,
     },
   },
 );

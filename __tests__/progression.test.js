@@ -2,18 +2,21 @@
 
 import { jest, afterEach } from '@jest/globals';
 import {
-    generateProgression,
     generateRandomNumber,
     getRandomElement,
+    range,
+  } from '../src/utils.js';
+
+import {
     arrayReplaceValue,
-  } from '../calculate.js';
+} from '../src/games/brain-progression.js';
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
 test('Progression', async () => {
-    const progression = generateProgression(generateRandomNumber(), 10);
+    const progression = range(generateRandomNumber(), 10);
     const element = getRandomElement(progression);
     const replacedProgression = arrayReplaceValue(progression, element, '..');
 
