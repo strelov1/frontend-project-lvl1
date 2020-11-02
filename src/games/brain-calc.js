@@ -16,7 +16,7 @@ export const calculate = (num1, num2, operation) => {
   }
 };
 
-const userQuestion = async () => {
+const question = async () => {
   const num1 = generateRandomNumber();
   const num2 = generateRandomNumber();
   const operation = generateRandomOperation();
@@ -29,7 +29,7 @@ const userQuestion = async () => {
 const createGame = engine(
   {
     gameName: 'What is the result of the expression?',
-    question: userQuestion,
+    question,
   },
 );
 

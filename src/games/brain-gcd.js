@@ -11,19 +11,19 @@ export const calculateGcd = (num1, num2) => {
   return 1;
 };
 
-const userQuestion = async () => {
+const question = async () => {
   const num1 = generateRandomNumber();
   const num2 = generateRandomNumber();
 
   console.log(`Question: ${num1} ${num2}`);
 
-  return calculateGcd(num1, num2);
+  return String(calculateGcd(num1, num2));
 };
 
 const createGame = engine(
   {
     gameName: 'Find the greatest common divisor of given numbers.',
-    question: userQuestion,
+    question,
   },
 );
 

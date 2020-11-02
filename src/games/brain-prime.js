@@ -14,7 +14,7 @@ export const isPrime = (num) => {
     .length === 0;
 };
 
-const userQuestion = async () => {
+const question = async () => {
   const num = generateRandomNumber();
 
   console.log(`Question: ${num}`);
@@ -25,7 +25,7 @@ const userQuestion = async () => {
 const createGame = engine(
   {
     gameName: 'Answer "yes" if given number is prime. Otherwise answer "no".',
-    question: userQuestion,
+    question,
   },
 );
 

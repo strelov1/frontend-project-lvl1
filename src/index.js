@@ -1,22 +1,22 @@
 import promptly from 'promptly';
 
-export const gameGreeting = (gameName) => {
+const gameGreeting = (gameName) => {
   console.log(gameName);
 };
 
-export const failGameMessage = (name) => {
+const failGameMessage = (name) => {
   console.log(`Let's try again, ${name}!`);
 };
 
-export const finishGameMessage = (name) => {
+const finishGameMessage = (name) => {
   console.log(`Congratulations, ${name}!`);
 };
 
-export const correctMessage = () => {
+const correctMessage = () => {
   console.log('Correct!');
 };
 
-export const failMessage = (question, answer) => {
+const failMessage = (question, answer) => {
   console.log(`'${answer}' is wrong answer ;(. Correct answer was '${question}'.`);
 };
 
@@ -32,7 +32,7 @@ const engine = ({
   const gameSettings = {
     onSuccessStep: correctMessage,
     onFailStep: failMessage,
-    onFailGame: finishGameMessage,
+    onFailGame: failGameMessage,
     onFinishGame: finishGameMessage,
     userAnswer,
     numberOfStep: 3,

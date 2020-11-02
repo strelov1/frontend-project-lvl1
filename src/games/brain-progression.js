@@ -10,7 +10,7 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
   return array.map((item) => (item === searchValue ? replaceValue : item));
 };
 
-const userQuestion = async () => {
+const question = async () => {
   const progression = range(generateRandomNumber(), 10);
   const element = getRandomElement(progression);
   const replacedProgression = arrayReplaceValue(progression, element, '..');
@@ -23,7 +23,7 @@ const userQuestion = async () => {
 const createGame = engine(
   {
     gameName: 'What number is missing in the progression?',
-    question: userQuestion,
+    question,
   },
 );
 
