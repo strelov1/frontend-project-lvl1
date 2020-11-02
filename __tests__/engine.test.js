@@ -14,6 +14,7 @@ test('Success game', async (done) => {
   const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('no');
   const userAnswer = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('no');
 
+  const userName = 'TestUSER';
   const gameName = 'Game Greeting!';
   const game = engine(
     {
@@ -27,21 +28,26 @@ test('Success game', async (done) => {
         onFailStep: (question, answer) => {
           expect(question).not.toBe(answer);
         }, 
-        onFinishGame: () => done(),
-        onFailGame: () => done(new Error('Игра завершилась ошибкой')),
+        onFinishGame: (user) => {
+          expect(user).toBe(userName);
+          done();
+        },
+        onFailGame: (user) => {
+          expect(user).toBe(userName);
+          done(new Error('Игра завершилась ошибкой'))
+        },
       },
     },
   );
-
-  await game('TestUSER');
-
-  expect(console.log).toHaveBeenCalledWith(gameName);
+  
+  await game(userName);
 });
 
 test('Failed game first step', async (done) => {
   const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
   const userAnswer = jest.fn().mockResolvedValueOnce('no').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
 
+  const userName = 'TestUSER2';
   const gameName = 'Game Greeting!';
   const game = engine(
     {
@@ -55,19 +61,26 @@ test('Failed game first step', async (done) => {
         onFailStep: (question, answer) => {
           expect(question).not.toBe(answer);
         }, 
-        onFinishGame: () => done(new Error('Игра не дождна была завершиться успехом')),
-        onFailGame: () => done(),
+        onFinishGame: (user) => {
+          expect(user).toBe(userName);
+          done(new Error('Игра не дождна была завершиться успехом'));
+        },
+        onFailGame: (user) => {
+          expect(user).toBe(userName);
+          done();
+        },
       },
     },
   );
 
-  await game('TestUSER');
+  await game(userName);
 });
 
 test('Failed game second step', async (done) => {
   const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
   const userAnswer = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('no').mockResolvedValueOnce('no');
 
+  const userName = 'TestUSER3';
   const gameName = 'Game Greeting!';
   const game = engine(
     {
@@ -81,19 +94,26 @@ test('Failed game second step', async (done) => {
         onFailStep: (question, answer) => {
           expect(question).not.toBe(answer);
         }, 
-        onFinishGame: () => done(new Error('Игра не дождна была завершиться успехом')),
-        onFailGame: () => done(),
+        onFinishGame: (user) => {
+          expect(user).toBe(userName);
+          done(new Error('Игра не дождна была завершиться успехом'));
+        },
+        onFailGame: (user) => {
+          expect(user).toBe(userName);
+          done();
+        },
       },
     },
   );
 
-  await game('TestUSER');
+  await game(userName);
 });
 
 test('Failed game last step', async (done) => {
   const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
   const userAnswer = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('no').mockResolvedValueOnce('no');
 
+  const userName = 'TestUSER4';
   const gameName = 'Game Greeting!';
   const game = engine(
     {
@@ -107,11 +127,17 @@ test('Failed game last step', async (done) => {
         onFailStep: (question, answer) => {
           expect(question).not.toBe(answer);
         }, 
-        onFinishGame: () => done(new Error('Игра не дождна была завершиться успехом')),
-        onFailGame: () => done(),
+        onFinishGame: (user) => {
+          expect(user).toBe(userName);
+          done(new Error('Игра не дождна была завершиться успехом'));
+        },
+        onFailGame: (user) => {
+          expect(user).toBe(userName);
+          done();
+        },
       },
     },
   );
 
-  await game('TestUSER');
+  await game(userName);
 });

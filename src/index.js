@@ -47,7 +47,7 @@ const engine = ({
       await gameSettings.onSuccessStep(userQuestion, answer);
     } else {
       await gameSettings.onFailStep(userQuestion, answer);
-      return gameSettings.onFailGame(userQuestion, answer);
+      return gameSettings.onFailGame(userName);
     }
   }
 
