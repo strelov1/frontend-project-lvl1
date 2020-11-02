@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
-import { brainGcdGame } from '../src/cli.js';
+import greeting from '../src/games/greeting.js';
+import runBrainGcdGame from '../src/games/brain-gcd.js';
 
-brainGcdGame();
+const main = async () => {
+    const userName = await greeting();
+    await runBrainGcdGame.run(userName);
+}
+
+main();

@@ -13,8 +13,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "npx -n --experimental-vm-modules -n --no-warnings jest --colors",
-    "test2": "jest --colors"
+    "test": "npx -n --experimental-vm-modules -n --no-warnings jest --colors"
   },
   "repository": {
     "type": "git",
@@ -34,10 +33,7 @@
     "promptly": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
     "@jest/globals": "^26.6.1",
-    "babel-jest": "^26.6.1",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",

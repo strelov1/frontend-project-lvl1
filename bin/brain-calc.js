@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
-import { brainCalcGame } from '../src/cli.js';
+import greeting from '../src/games/greeting.js';
+import runBrainCalcGame from '../src/games/brain-calc.js';
 
-brainCalcGame();
+const main = async () => {
+    const userName = await greeting();
+    await runBrainCalcGame.run(userName);
+};
+
+main();

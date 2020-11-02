@@ -10,8 +10,11 @@ test:
 publish:
 	npm publish --dry-run
 
-lint:
+lint-fix:
 	npx eslint . --fix
+
+lint:
+	npx eslint .
 
 brain-games:
 	node bin/brain-games.js
