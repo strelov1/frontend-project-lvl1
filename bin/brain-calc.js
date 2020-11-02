@@ -5,7 +5,7 @@ import runBrainCalcGame from '../src/games/brain-calc.js';
 
 const main = async () => {
   const userName = await greeting();
-  await runBrainCalcGame.run(userName);
+  await runBrainCalcGame(userName);
 };
 
 main();

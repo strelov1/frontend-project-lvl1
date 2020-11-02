@@ -5,7 +5,7 @@ import runBrainProgressionGame from '../src/games/brain-progression.js';
 
 const main = async () => {
   const userName = await greeting();
-  await runBrainProgressionGame.run(userName);
+  await runBrainProgressionGame(userName);
 };
 
 main();

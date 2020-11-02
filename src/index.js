@@ -1,4 +1,8 @@
-import engine, { FAIL_GAME_STEP, SUCCESS_GAME_STEP } from './engine.js';
+import promptly from 'promptly';
+
+export const gameGreeting = (gameName) => {
+  console.log(gameName);
+};
 
 export const failGameMessage = (name) => {
   console.log(`Let's try again, ${name}!`);
@@ -16,42 +20,38 @@ export const failMessage = (question, answer) => {
   console.log(`'${answer}' is wrong answer ;(. Correct answer was '${question}'.`);
 };
 
-/**
- * Обобщение игровых правил
- * @param {ConfigureGameProps} param0
- */
-const configureGame = ({ gameName, gameConditions, gameSettings }) => {
-  const commonGameConditions = {
-    failStep: FAIL_GAME_STEP,
+const userAnswer = () => promptly.prompt('Your answer:');
+
+const condition = (question, answer) => question === answer;
+
+const engine = ({
+  gameName, question, settings,
+}) => async (userName) => {
+  await gameGreeting(gameName);
+
+  const gameSettings = {
     onSuccessStep: correctMessage,
     onFailStep: failMessage,
-    ...gameConditions,
-  };
-  return engine({
-    gameGreeting: async () => {
-      console.log(gameName);
-    },
-    rules: [
-      {
-        name: 'one',
-        successStep: 'two',
-        ...commonGameConditions,
-      },
-      {
-        name: 'two',
-        successStep: 'three',
-        ...commonGameConditions,
-      },
-      {
-        name: 'three',
-        successStep: SUCCESS_GAME_STEP,
-        ...commonGameConditions,
-      },
-    ],
-    onFailGame: failGameMessage,
+    onFailGame: finishGameMessage,
     onFinishGame: finishGameMessage,
-    ...gameSettings,
-  });
+    userAnswer,
+    numberOfStep: 3,
+    ...settings,
+  };
+
+  /* eslint-disable no-await-in-loop */
+  for (let step = 0; step < gameSettings.numberOfStep; step += 1) {
+    const userQuestion = await question();
+    const answer = await gameSettings.userAnswer();
+    if (condition(userQuestion, answer)) {
+      await gameSettings.onSuccessStep(userQuestion, answer);
+    } else {
+      await gameSettings.onFailStep(userQuestion, answer);
+      return gameSettings.onFailGame(userQuestion, answer);
+    }
+  }
+
+  return gameSettings.onFinishGame(userName);
 };
 
-export default configureGame;
+export default engine;

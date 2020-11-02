@@ -1,6 +1,5 @@
-import promptly from 'promptly';
-import configureGame from '../index.js';
 import { generateRandomNumber, getRandomElement } from '../utils.js';
+import engine from '../index.js';
 
 export const generateRandomOperation = () => getRandomElement(['+', '-', '*']);
 
@@ -24,18 +23,13 @@ const userQuestion = async () => {
 
   console.log(`Question: ${num1} ${operation} ${num2}`);
 
-  return calculate(num1, num2, operation);
+  return String(calculate(num1, num2, operation));
 };
 
-const userAnswer = () => promptly.prompt('Your answer:');
-
-const createGame = configureGame(
+const createGame = engine(
   {
     gameName: 'What is the result of the expression?',
-    gameConditions: {
-      question: userQuestion,
-      answer: userAnswer,
-    },
+    question: userQuestion,
   },
 );
 

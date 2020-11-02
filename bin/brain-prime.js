@@ -5,7 +5,7 @@ import runBrainPrimeGame from '../src/games/brain-prime.js';
 
 const main = async () => {
   const userName = await greeting();
-  await runBrainPrimeGame.run(userName);
+  await runBrainPrimeGame(userName);
 };
 
 main();

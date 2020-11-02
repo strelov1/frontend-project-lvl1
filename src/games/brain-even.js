@@ -1,6 +1,5 @@
-import promptly from 'promptly';
-import configureGame from '../index.js';
 import { generateRandomNumber } from '../utils.js';
+import engine from '../index.js';
 
 export const isEven = (num) => num % 2 === 0;
 
@@ -10,16 +9,11 @@ const userQuestion = async () => {
   return isEven(question) ? 'yes' : 'no';
 };
 
-const userAnswer = () => promptly.prompt('Your answer:');
-
-const game = configureGame(
+const brainEvenGame = engine(
   {
     gameName: 'Answer "yes" if the number is even, otherwise answer "no".',
-    gameConditions: {
-      question: userQuestion,
-      answer: userAnswer,
-    },
+    question: userQuestion,
   },
 );
 
-export default game;
+export default brainEvenGame;

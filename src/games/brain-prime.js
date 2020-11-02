@@ -1,6 +1,5 @@
-import promptly from 'promptly';
-import configureGame from '../index.js';
 import { generateRandomNumber, range } from '../utils.js';
+import engine from '../index.js';
 
 // eslint-disable-next-line no-bitwise
 const isInteger = (n) => (n ^ 0) === n;
@@ -23,15 +22,10 @@ const userQuestion = async () => {
   return isPrime(num) ? 'yes' : 'no';
 };
 
-const userAnswer = () => promptly.prompt('Your answer:');
-
-const createGame = configureGame(
+const createGame = engine(
   {
     gameName: 'Answer "yes" if given number is prime. Otherwise answer "no".',
-    gameConditions: {
-      question: userQuestion,
-      answer: userAnswer,
-    },
+    question: userQuestion,
   },
 );
 

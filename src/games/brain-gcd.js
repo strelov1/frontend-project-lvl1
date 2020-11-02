@@ -1,6 +1,5 @@
-import promptly from 'promptly';
-import configureGame from '../index.js';
 import { generateRandomNumber } from '../utils.js';
+import engine from '../index.js';
 
 export const calculateGcd = (num1, num2) => {
   const max = Math.max(num1, num2);
@@ -21,15 +20,10 @@ const userQuestion = async () => {
   return calculateGcd(num1, num2);
 };
 
-const userAnswer = () => promptly.prompt('Your answer:');
-
-const createGame = configureGame(
+const createGame = engine(
   {
     gameName: 'Find the greatest common divisor of given numbers.',
-    gameConditions: {
-      question: userQuestion,
-      answer: userAnswer,
-    },
+    question: userQuestion,
   },
 );
 

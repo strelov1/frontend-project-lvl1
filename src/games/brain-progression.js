@@ -1,10 +1,9 @@
-import promptly from 'promptly';
-import configureGame from '../index.js';
 import {
   generateRandomNumber,
   getRandomElement,
   range,
 } from '../utils.js';
+import engine from '../index.js';
 
 // eslint-disable-next-line arrow-body-style
 export const arrayReplaceValue = (array, searchValue, replaceValue) => {
@@ -18,18 +17,13 @@ const userQuestion = async () => {
 
   console.log(`Question: ${replacedProgression.join(' ')}`);
 
-  return element;
+  return String(element);
 };
 
-const userAnswer = () => promptly.prompt('Your answer:');
-
-const createGame = configureGame(
+const createGame = engine(
   {
     gameName: 'What number is missing in the progression?',
-    gameConditions: {
-      question: userQuestion,
-      answer: userAnswer,
-    },
+    question: userQuestion,
   },
 );
 

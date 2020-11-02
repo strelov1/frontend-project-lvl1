@@ -5,7 +5,7 @@ import runBrainGcdGame from '../src/games/brain-gcd.js';
 
 const main = async () => {
   const userName = await greeting();
-  await runBrainGcdGame.run(userName);
+  await runBrainGcdGame(userName);
 };
 
 main();
