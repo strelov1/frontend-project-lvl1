@@ -16,7 +16,7 @@ test('Is Prime', async () => {
 });
 
 test('Not even', async () => {
-    const evenNumbers = [4, 84, 194, 312, 440, 576];
+    const evenNumbers = [1, 4, 84, 194, 312, 440, 576];
 
     for (const number of evenNumbers) {
         expect(isPrime(number)).not.toBe(true);

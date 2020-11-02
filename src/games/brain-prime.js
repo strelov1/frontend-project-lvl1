@@ -5,7 +5,7 @@ import engine from '../index.js';
 const isInteger = (n) => (n ^ 0) === n;
 
 export const isPrime = (num) => {
-  if (num <= 0) {
+  if (num <= 1) {
     return false;
   }
   return range(2, num - 2)
