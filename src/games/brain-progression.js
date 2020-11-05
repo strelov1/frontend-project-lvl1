@@ -3,7 +3,7 @@ import {
   getRandomElement,
   range,
 } from '../utils.js';
-import engine from '../index.js';
+import createGame from '../index.js';
 
 // eslint-disable-next-line arrow-body-style
 export const arrayReplaceValue = (array, searchValue, replaceValue) => {
@@ -15,16 +15,9 @@ const question = async () => {
   const element = getRandomElement(progression);
   const replacedProgression = arrayReplaceValue(progression, element, '..');
 
-  console.log(`Question: ${replacedProgression.join(' ')}`);
-
-  return String(element);
+  return [replacedProgression.join(' '), String(element)];
 };
 
-const createGame = engine(
-  {
-    gameName: 'What number is missing in the progression?',
-    question,
-  },
-);
+const game = () => createGame('What number is missing in the progression?', question);
 
-export default createGame;
+export default game;

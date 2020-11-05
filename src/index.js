@@ -1,57 +1,50 @@
 import promptly from 'promptly';
 
-const gameGreeting = (gameName) => {
-  console.log(gameName);
-};
+const print = console.log;
+const { prompt } = promptly;
 
-const failGameMessage = (name) => {
-  console.log(`Let's try again, ${name}!`);
-};
+const NUMBER_OF_STEP = 3;
 
-const finishGameMessage = (name) => {
-  console.log(`Congratulations, ${name}!`);
-};
-
-const correctMessage = () => {
-  console.log('Correct!');
-};
-
-const failMessage = (question, answer) => {
-  console.log(`'${answer}' is wrong answer ;(. Correct answer was '${question}'.`);
-};
-
-const userAnswer = () => promptly.prompt('Your answer:');
-
-const condition = (question, answer) => question === answer;
-
-const engine = ({
-  gameName, question, settings,
-}) => async (userName) => {
-  await gameGreeting(gameName);
-
-  const gameSettings = {
-    onSuccessStep: correctMessage,
-    onFailStep: failMessage,
-    onFailGame: failGameMessage,
-    onFinishGame: finishGameMessage,
-    userAnswer,
-    numberOfStep: 3,
-    ...settings,
+const engine = async (gameName, question, overrideActions = {}) => {
+  const gameActions = {
+    greeting: async () => {
+      await print('Welcome to the Brain Games!');
+      const userName = await prompt('May I have your name?');
+      await print(`Hello, ${userName}!`);
+      return userName;
+    },
+    userAnswer: () => prompt('Your answer:'),
+    onSuccessStep: () => print('Correct!'),
+    onFailStep: (rightAnswer, userAnswer) => print(`'${userAnswer}' is wrong answer ;(. Correct answer was '${rightAnswer}'.`),
+    onFailGame: (name) => print(`Let's try again, ${name}!`),
+    onFinishGame: (name) => print(`Congratulations, ${name}!`),
+    ...overrideActions,
   };
 
+  const userName = await gameActions.greeting();
+
+  await print(gameName);
+
+  const condition = (userQuestion, userAnswer) => userQuestion === userAnswer;
+
   /* eslint-disable no-await-in-loop */
-  for (let step = 0; step < gameSettings.numberOfStep; step += 1) {
-    const userQuestion = await question();
-    const answer = await gameSettings.userAnswer();
-    if (condition(userQuestion, answer)) {
-      await gameSettings.onSuccessStep(userQuestion, answer);
+  for (let step = 0; step < NUMBER_OF_STEP; step += 1) {
+    const [gameQuestion, rightAnswer] = await question();
+
+    await print(`Question: ${gameQuestion}`);
+
+    const userAnswer = await gameActions.userAnswer();
+
+    if (condition(rightAnswer, userAnswer)) {
+      await gameActions.onSuccessStep(rightAnswer, userAnswer);
     } else {
-      await gameSettings.onFailStep(userQuestion, answer);
-      return gameSettings.onFailGame(userName);
+      await gameActions.onFailStep(rightAnswer, userAnswer);
+      await gameActions.onFailGame(userName);
+      return;
     }
   }
 
-  return gameSettings.onFinishGame(userName);
+  await gameActions.onFinishGame(userName);
 };
 
 export default engine;

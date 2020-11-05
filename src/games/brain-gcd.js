@@ -1,5 +1,5 @@
 import { generateRandomNumber } from '../utils.js';
-import engine from '../index.js';
+import createGame from '../index.js';
 
 export const calculateGcd = (num1, num2) => {
   const max = Math.max(num1, num2);
@@ -12,19 +12,12 @@ export const calculateGcd = (num1, num2) => {
 };
 
 const question = async () => {
-  const num1 = generateRandomNumber();
-  const num2 = generateRandomNumber();
+  const num1 = generateRandomNumber(1, 10);
+  const num2 = generateRandomNumber(1, 10);
 
-  console.log(`Question: ${num1} ${num2}`);
-
-  return String(calculateGcd(num1, num2));
+  return [`${num1} ${num2}`, String(calculateGcd(num1, num2))];
 };
 
-const createGame = engine(
-  {
-    gameName: 'Find the greatest common divisor of given numbers.',
-    question,
-  },
-);
+const game = () => createGame('Find the greatest common divisor of given numbers.', question);
 
-export default createGame;
+export default game;

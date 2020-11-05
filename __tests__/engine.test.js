@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { jest, afterEach } from '@jest/globals';
-import engine from '../src/index.js';
+import runGame from '../src/index.js';
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
 
@@ -11,16 +11,24 @@ afterEach(() => {
 
 
 test('Success game', async (done) => {
-  const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('no');
-  const userAnswer = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('no');
+  const userQuestion = jest.fn()
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'no']);
 
-  const userName = 'TestUSER';
+  const userAnswer = jest.fn()
+    .mockResolvedValueOnce('yes')
+    .mockResolvedValueOnce('yes')
+    .mockResolvedValueOnce('no');
+
+  const userName = 'TestUser';
   const gameName = 'Game Greeting!';
-  const game = engine(
-    {
+  
+  await runGame(
       gameName,
-      question: userQuestion,
-      settings: {
+      userQuestion,
+      {
+        greeting: async () => userName,
         userAnswer: userAnswer,
         onSuccessStep: (question, answer) => {
           expect(question).toBe(answer);
@@ -37,23 +45,28 @@ test('Success game', async (done) => {
           done(new Error('Игра завершилась ошибкой'))
         },
       },
-    },
   );
-  
-  await game(userName);
 });
 
 test('Failed game first step', async (done) => {
-  const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
-  const userAnswer = jest.fn().mockResolvedValueOnce('no').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
+  const userQuestion = jest.fn()
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes']);
+
+  const userAnswer = jest.fn()
+    .mockResolvedValueOnce('no')
+    .mockResolvedValueOnce('yes')
+    .mockResolvedValueOnce('yes');
 
   const userName = 'TestUSER2';
   const gameName = 'Game Greeting!';
-  const game = engine(
-    {
+ 
+  await runGame(
       gameName,
-      question: userQuestion,
-      settings: {
+      userQuestion,
+      {
+        greeting: async () => userName,
         userAnswer: userAnswer,
         onSuccessStep: (question, answer) => {
           expect(question).toBe(answer);
@@ -70,23 +83,28 @@ test('Failed game first step', async (done) => {
           done();
         },
       },
-    },
   );
-
-  await game(userName);
 });
 
 test('Failed game second step', async (done) => {
-  const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
-  const userAnswer = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('no').mockResolvedValueOnce('no');
+  const userQuestion = jest.fn()
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes']);
+
+  const userAnswer = jest.fn()
+    .mockResolvedValueOnce('yes')
+    .mockResolvedValueOnce('no')
+    .mockResolvedValueOnce('yes');
 
   const userName = 'TestUSER3';
   const gameName = 'Game Greeting!';
-  const game = engine(
-    {
+ 
+  await runGame(
       gameName,
-      question: userQuestion,
-      settings: {
+      userQuestion,
+      {
+        greeting: async () => userName,
         userAnswer: userAnswer,
         onSuccessStep: (question, answer) => {
           expect(question).toBe(answer);
@@ -103,23 +121,28 @@ test('Failed game second step', async (done) => {
           done();
         },
       },
-    },
   );
-
-  await game(userName);
 });
 
 test('Failed game last step', async (done) => {
-  const userQuestion = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('yes').mockResolvedValueOnce('yes');
-  const userAnswer = jest.fn().mockResolvedValueOnce('yes').mockResolvedValueOnce('no').mockResolvedValueOnce('no');
+  const userQuestion = jest.fn()
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes'])
+    .mockResolvedValueOnce(['question', 'yes']);
 
-  const userName = 'TestUSER4';
+  const userAnswer = jest.fn()
+    .mockResolvedValueOnce('yes')
+    .mockResolvedValueOnce('yes')
+    .mockResolvedValueOnce('no');
+
+  const userName = 'TestUSER3';
   const gameName = 'Game Greeting!';
-  const game = engine(
-    {
+ 
+  await runGame(
       gameName,
-      question: userQuestion,
-      settings: {
+      userQuestion,
+      {
+        greeting: async () => userName,
         userAnswer: userAnswer,
         onSuccessStep: (question, answer) => {
           expect(question).toBe(answer);
@@ -136,8 +159,5 @@ test('Failed game last step', async (done) => {
           done();
         },
       },
-    },
   );
-
-  await game(userName);
 });

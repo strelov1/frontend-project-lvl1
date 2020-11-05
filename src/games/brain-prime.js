@@ -1,5 +1,5 @@
 import { generateRandomNumber, range } from '../utils.js';
-import engine from '../index.js';
+import createGame from '../index.js';
 
 // eslint-disable-next-line no-bitwise
 const isInteger = (n) => (n ^ 0) === n;
@@ -15,18 +15,11 @@ export const isPrime = (num) => {
 };
 
 const question = async () => {
-  const num = generateRandomNumber();
+  const num = generateRandomNumber(1, 100);
 
-  console.log(`Question: ${num}`);
-
-  return isPrime(num) ? 'yes' : 'no';
+  return [num, isPrime(num) ? 'yes' : 'no'];
 };
 
-const createGame = engine(
-  {
-    gameName: 'Answer "yes" if given number is prime. Otherwise answer "no".',
-    question,
-  },
-);
+const game = () => createGame('Answer "yes" if given number is prime. Otherwise answer "no".', question);
 
-export default createGame;
+export default game;

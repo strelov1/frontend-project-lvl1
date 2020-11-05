@@ -1,5 +1,5 @@
 import { generateRandomNumber, getRandomElement } from '../utils.js';
-import engine from '../index.js';
+import createGame from '../index.js';
 
 export const generateRandomOperation = () => getRandomElement(['+', '-', '*']);
 
@@ -17,20 +17,13 @@ export const calculate = (num1, num2, operation) => {
 };
 
 const question = async () => {
-  const num1 = generateRandomNumber();
-  const num2 = generateRandomNumber();
+  const num1 = generateRandomNumber(1, 10);
+  const num2 = generateRandomNumber(1, 10);
   const operation = generateRandomOperation();
 
-  console.log(`Question: ${num1} ${operation} ${num2}`);
-
-  return String(calculate(num1, num2, operation));
+  return [`${num1} ${operation} ${num2}`, String(calculate(num1, num2, operation))];
 };
 
-const createGame = engine(
-  {
-    gameName: 'What is the result of the expression?',
-    question,
-  },
-);
+const game = () => createGame('What is the result of the expression?', question);
 
-export default createGame;
+export default game;
