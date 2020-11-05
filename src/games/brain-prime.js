@@ -1,17 +1,15 @@
 import { generateRandomNumber, range } from '../utils.js';
 import createGame from '../index.js';
 
-// eslint-disable-next-line no-bitwise
-const isInteger = (n) => (n ^ 0) === n;
-
 export const isPrime = (num) => {
   if (num <= 1) {
     return false;
   }
-  return range(2, num - 2)
-    .map((item) => (num / item))
-    .filter(isInteger)
-    .length === 0;
+  if (num <= 3) {
+    return true;
+  }
+  return range(2, num / 2)
+    .every((item) => (num % item !== 0));
 };
 
 const question = async () => {

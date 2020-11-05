@@ -1,7 +1,5 @@
 import {
-  generateRandomNumber,
   getRandomElement,
-  range,
 } from '../utils.js';
 import createGame from '../index.js';
 
@@ -10,8 +8,16 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
   return array.map((item) => (item === searchValue ? replaceValue : item));
 };
 
+const generateProgreesion = (start, stop, step) => {
+  const progression = [];
+  for (let i = start; i <= stop; i += step) {
+    progression.push(i);
+  }
+  return progression;
+};
+
 const question = async () => {
-  const progression = range(generateRandomNumber(), 10);
+  const progression = generateProgreesion();
   const element = getRandomElement(progression);
   const replacedProgression = arrayReplaceValue(progression, element, '..');
 

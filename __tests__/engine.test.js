@@ -30,11 +30,11 @@ test('Success game', async (done) => {
       {
         greeting: async () => userName,
         userAnswer: userAnswer,
-        onSuccessStep: (question, answer) => {
-          expect(question).toBe(answer);
+        onSuccessStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).toBe(rightAnswer);
         },
-        onFailStep: (question, answer) => {
-          expect(question).not.toBe(answer);
+        onFailStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).not.toBe(rightAnswer);
         }, 
         onFinishGame: (user) => {
           expect(user).toBe(userName);
@@ -68,11 +68,11 @@ test('Failed game first step', async (done) => {
       {
         greeting: async () => userName,
         userAnswer: userAnswer,
-        onSuccessStep: (question, answer) => {
-          expect(question).toBe(answer);
+        onSuccessStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).toBe(rightAnswer);
         },
-        onFailStep: (question, answer) => {
-          expect(question).not.toBe(answer);
+        onFailStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).not.toBe(rightAnswer);
         }, 
         onFinishGame: (user) => {
           expect(user).toBe(userName);
@@ -106,11 +106,11 @@ test('Failed game second step', async (done) => {
       {
         greeting: async () => userName,
         userAnswer: userAnswer,
-        onSuccessStep: (question, answer) => {
-          expect(question).toBe(answer);
+        onSuccessStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).toBe(rightAnswer);
         },
-        onFailStep: (question, answer) => {
-          expect(question).not.toBe(answer);
+        onFailStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).not.toBe(rightAnswer);
         }, 
         onFinishGame: (user) => {
           expect(user).toBe(userName);
@@ -144,11 +144,11 @@ test('Failed game last step', async (done) => {
       {
         greeting: async () => userName,
         userAnswer: userAnswer,
-        onSuccessStep: (question, answer) => {
-          expect(question).toBe(answer);
+        onSuccessStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).toBe(rightAnswer);
         },
-        onFailStep: (question, answer) => {
-          expect(question).not.toBe(answer);
+        onFailStep: (rightAnswer, userAnswer) => {
+          expect(userAnswer).not.toBe(rightAnswer);
         }, 
         onFinishGame: (user) => {
           expect(user).toBe(userName);

@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 test('Is Prime', async () => {
-    const evenNumbers = [2, 79, 191, 197, 313, 449];
+    const evenNumbers = [2, 3, 5, 7, 79, 191, 197, 313, 449];
 
     for (const number of evenNumbers) {
         expect(isPrime(number)).toBe(true);
@@ -16,8 +16,8 @@ test('Is Prime', async () => {
 });
 
 test('Not even', async () => {
-    const evenNumbers = [1, 4, 84, 194, 312, 440, 576];
-
+    const evenNumbers = [1, 4, 8, 84, 194, 312, 440, 576];
+    
     for (const number of evenNumbers) {
         expect(isPrime(number)).not.toBe(true);
     }
