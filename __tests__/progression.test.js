@@ -4,11 +4,11 @@ import { jest, afterEach } from '@jest/globals';
 import {
     random,
     getRandomElement,
-    range,
-  } from '../src/utils.js';
+} from '../src/utils.js';
 
 import {
     arrayReplaceValue,
+    generateProgressions
 } from '../src/games/brain-progression.js';
 
 afterEach(() => {
@@ -16,7 +16,9 @@ afterEach(() => {
 });
 
 test('Progression', async () => {
-    const progression = range(random(), 10);
+    const settings = [random(1, 10), random(20, 100), random(1, 10)];
+    const progression = generateProgressions(...settings);
+
     const element = getRandomElement(progression);
     const replacedProgression = arrayReplaceValue(progression, element, '..');
 
