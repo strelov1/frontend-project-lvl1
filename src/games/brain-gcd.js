@@ -1,4 +1,4 @@
-import { generateRandomNumber } from '../utils.js';
+import { random } from '../utils.js';
 import createGame from '../index.js';
 
 export const calculateGcd = (num1, num2) => {
@@ -12,8 +12,8 @@ export const calculateGcd = (num1, num2) => {
 };
 
 const question = async () => {
-  const num1 = generateRandomNumber(1, 10);
-  const num2 = generateRandomNumber(1, 10);
+  const num1 = random(1, 10);
+  const num2 = random(1, 10);
 
   return [`${num1} ${num2}`, String(calculateGcd(num1, num2))];
 };

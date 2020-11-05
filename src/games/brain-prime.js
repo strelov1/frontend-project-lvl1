@@ -1,4 +1,4 @@
-import { generateRandomNumber, range } from '../utils.js';
+import { random, range } from '../utils.js';
 import createGame from '../index.js';
 
 export const isPrime = (num) => {
@@ -13,7 +13,7 @@ export const isPrime = (num) => {
 };
 
 const question = async () => {
-  const num = generateRandomNumber(1, 100);
+  const num = random(1, 100);
 
   return [num, isPrime(num) ? 'yes' : 'no'];
 };

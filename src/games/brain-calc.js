@@ -1,4 +1,4 @@
-import { generateRandomNumber, getRandomElement } from '../utils.js';
+import { random, getRandomElement } from '../utils.js';
 import createGame from '../index.js';
 
 export const generateRandomOperation = () => getRandomElement(['+', '-', '*']);
@@ -17,8 +17,8 @@ export const calculate = (num1, num2, operation) => {
 };
 
 const question = async () => {
-  const num1 = generateRandomNumber(1, 10);
-  const num2 = generateRandomNumber(1, 10);
+  const num1 = random(1, 10);
+  const num2 = random(1, 10);
   const operation = generateRandomOperation();
 
   return [`${num1} ${operation} ${num2}`, String(calculate(num1, num2, operation))];

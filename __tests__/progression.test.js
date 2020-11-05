@@ -2,7 +2,7 @@
 
 import { jest, afterEach } from '@jest/globals';
 import {
-    generateRandomNumber,
+    random,
     getRandomElement,
     range,
   } from '../src/utils.js';
@@ -16,7 +16,7 @@ afterEach(() => {
 });
 
 test('Progression', async () => {
-    const progression = range(generateRandomNumber(), 10);
+    const progression = range(random(), 10);
     const element = getRandomElement(progression);
     const replacedProgression = arrayReplaceValue(progression, element, '..');
 

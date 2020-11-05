@@ -1,7 +1,25 @@
-import promptly from 'promptly';
+const print = (message) => {
+  try {
+    if (document) {
+      alert(message);
+    }
+  } catch (e) {
+    //
+  }
+  console.log(message);
+};
 
-const print = console.log;
-const { prompt } = promptly;
+const interact = async (message) => {
+  try {
+    if (document) {
+      return prompt(message);
+    }
+  } catch (e) {
+    //
+  }
+  const promptly = await import('promptly').then((module) => module.default);
+  return promptly.prompt(message);
+};
 
 const NUMBER_OF_STEP = 3;
 
@@ -9,11 +27,11 @@ const engine = async (gameName, question, overrideActions = {}) => {
   const gameActions = {
     greeting: async () => {
       await print('Welcome to the Brain Games!');
-      const userName = await prompt('May I have your name?');
+      const userName = await interact('May I have your name?');
       await print(`Hello, ${userName}!`);
       return userName;
     },
-    userAnswer: () => prompt('Your answer:'),
+    userAnswer: () => interact('Your answer:'),
     onSuccessStep: () => print('Correct!'),
     onFailStep: (rightAnswer, userAnswer) => print(`'${userAnswer}' is wrong answer ;(. Correct answer was '${rightAnswer}'.`),
     onFailGame: (name) => print(`Let's try again, ${name}!`),
