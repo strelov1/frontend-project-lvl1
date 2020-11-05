@@ -28,7 +28,7 @@ const interact = async (message) => {
 
 const NUMBER_OF_STEP = 3;
 
-export default async function(gameName, question, overrideActions = {}) {
+export default async function createGame(gameName, question, overrideActions = {}) {
   const gameActions = {
     greeting: async () => {
       await print('Welcome to the Brain Games!');
@@ -68,4 +68,4 @@ export default async function(gameName, question, overrideActions = {}) {
   }
 
   await gameActions.onFinishGame(userName);
-};
+}
