@@ -1,7 +1,4 @@
-import {
-  random,
-  getRandomElement,
-} from '../utils.js';
+import { random, getRandomElement } from '../utils.js';
 import createGame from '../index.js';
 
 // eslint-disable-next-line arrow-body-style
@@ -10,7 +7,6 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
 };
 
 const generateProgreesion = (start, stop, step) => {
-  console.log(start, stop, step);
   const progression = [];
   for (let i = start; i <= stop; i += step) {
     progression.push(i);
