@@ -23,7 +23,7 @@ const interact = async (message) => {
 
 const NUMBER_OF_STEP = 3;
 
-const engine = async (gameName, question, overrideActions = {}) => {
+const createGame = async (gameName, question, overrideActions = {}) => {
   const gameActions = {
     greeting: async () => {
       await print('Welcome to the Brain Games!');
@@ -65,4 +65,4 @@ const engine = async (gameName, question, overrideActions = {}) => {
   await gameActions.onFinishGame(userName);
 };
 
-export default engine;
+export default createGame;
