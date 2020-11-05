@@ -21,6 +21,7 @@ const interact = async (message) => {
   } catch (e) {
     //
   }
+  /* eslint-disable-next-line import/no-named-as-default-member */
   const promptly = await import('promptly').then((module) => module.default);
   return promptly.prompt(message);
 };

@@ -4,6 +4,10 @@
 [![Node.js CI](https://github.com/strelov1/frontend-project-lvl1/workflows/Node.js%20CI/badge.svg)](https://github.com/strelov1/frontend-project-lvl1/actions?query=workflow%3A%22Node.js+CI%22)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/strelov1/frontend-project-lvl1)
 
+## Run in browser
+```bash
+make start
+```
 
 ## Examples
 

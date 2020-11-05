@@ -7,6 +7,9 @@ link:
 test:
 	npm run test
 
+start:
+	npm run start
+
 publish:
 	npm publish --dry-run
 
