@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import brainEvenGame from './src/games/brain-even.js';
 import runBrainCalcGame from './src/games/brain-calc.js';
 import runBrainGcdGame from './src/games/brain-gcd.js';

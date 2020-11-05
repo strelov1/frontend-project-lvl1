@@ -1,6 +1,8 @@
 const print = (message) => {
   try {
+    /* eslint-disable-next-line no-undef */
     if (document) {
+      /* eslint-disable-next-line no-alert, no-undef */
       alert(message);
     }
   } catch (e) {
@@ -11,7 +13,9 @@ const print = (message) => {
 
 const interact = async (message) => {
   try {
+    /* eslint-disable-next-line no-undef */
     if (document) {
+      /* eslint-disable-next-line no-alert, no-undef */
       return prompt(message);
     }
   } catch (e) {
@@ -23,7 +27,7 @@ const interact = async (message) => {
 
 const NUMBER_OF_STEP = 3;
 
-const createGame = async (gameName, question, overrideActions = {}) => {
+export default async function(gameName, question, overrideActions = {}) {
   const gameActions = {
     greeting: async () => {
       await print('Welcome to the Brain Games!');
@@ -64,5 +68,3 @@ const createGame = async (gameName, question, overrideActions = {}) => {
 
   await gameActions.onFinishGame(userName);
 };
-
-export default createGame;
