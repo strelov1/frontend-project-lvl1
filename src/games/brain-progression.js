@@ -6,17 +6,23 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
   return array.map((item) => (item === searchValue ? replaceValue : item));
 };
 
-export const generateProgressions = (start, stop, step) => {
+export const generateProgressions = (start, length, step) => {
   const progression = [];
-  for (let i = start; i <= stop; i += step) {
-    progression.push(i);
+  let incrment = start;
+  for (let i = 0; i < length; i += 1) {
+    progression.push(incrment);
+    incrment += step;
   }
   return progression;
 };
 
 const question = async () => {
-  const settings = [random(1, 10), random(20, 100), random(1, 10)];
-  const progression = generateProgressions(...settings);
+  const start = random(1, 10);
+  const length = random(5, 10);
+  const step = random(1, 10);
+
+  const progression = generateProgressions(start, length, step);
+
   const element = getRandomElement(progression);
   const replacedProgression = arrayReplaceValue(progression, element, '..');
 
