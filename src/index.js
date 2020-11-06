@@ -12,23 +12,21 @@ const isBrowser = () => {
 };
 
 export default async function createGame(gameName, question) {
-  if (!isBrowser()) {
-    /* eslint-disable-next-line */
-    const promptly = await import('promptly').then((module) => module.default);
-    const cliEnv = {
-      print: (message) => console.log(message),
-      interact: (message) => promptly.prompt(message),
+  if (isBrowser()) {
+    const browserEnv = {
+      /* eslint-disable-next-line */
+      print: (message) => alert(message),
+      /* eslint-disable-next-line */
+      interact: (message) => prompt(message),
     };
-
-    return engine(gameName, question, cliEnv);
+    return engine(gameName, question, browserEnv);
   }
 
-  const browserEnv = {
-    /* eslint-disable-next-line */
-    print: (message) => alert(message),
-    /* eslint-disable-next-line */
-    interact: (message) => prompt(message),
+  /* eslint-disable-next-line */
+  const promptly = await import('promptly').then((module) => module.default);
+  const cliEnv = {
+    print: (message) => console.log(message),
+    interact: (message) => promptly.prompt(message),
   };
-
-  return engine(gameName, question, browserEnv);
+  return engine(gameName, question, cliEnv);
 }
