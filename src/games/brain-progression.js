@@ -24,4 +24,3 @@ const question = async () => {
 };
 
 export default () => createGame('What number is missing in the progression?', question);
-
