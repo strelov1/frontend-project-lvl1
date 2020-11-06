@@ -21,8 +21,9 @@ const interact = async (message) => {
   } catch (e) {
     //
   }
-  /* eslint-disable-next-line import/no-named-as-default-member */
+  /* eslint-disable-next-line import/no-named-as-default-member import/no-named-as-default */
   const promptly = await import('promptly').then((module) => module.default);
+  /* eslint-disable-next-line import/no-named-as-default-member import/no-named-as-default */
   return promptly.prompt(message);
 };
 
