@@ -23,6 +23,5 @@ const question = async () => {
   return [replacedProgression.join(' '), String(element)];
 };
 
-const game = () => createGame('What number is missing in the progression?', question);
+export default () => createGame('What number is missing in the progression?', question);
 
-export default game;

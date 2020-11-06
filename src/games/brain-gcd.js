@@ -18,6 +18,4 @@ const question = async () => {
   return [`${num1} ${num2}`, String(calculateGcd(num1, num2))];
 };
 
-const game = () => createGame('Find the greatest common divisor of given numbers.', question);
-
-export default game;
+export default  () => createGame('Find the greatest common divisor of given numbers.', question);

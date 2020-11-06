@@ -18,6 +18,4 @@ const question = async () => {
   return [num, isPrime(num) ? 'yes' : 'no'];
 };
 
-const game = () => createGame('Answer "yes" if given number is prime. Otherwise answer "no".', question);
-
-export default game;
+export default () => createGame('Answer "yes" if given number is prime. Otherwise answer "no".', question);

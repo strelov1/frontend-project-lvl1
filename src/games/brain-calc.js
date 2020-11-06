@@ -24,6 +24,4 @@ const question = async () => {
   return [`${num1} ${operation} ${num2}`, String(calculate(num1, num2, operation))];
 };
 
-const game = () => createGame('What is the result of the expression?', question);
-
-export default game;
+export default () => createGame('What is the result of the expression?', question);
