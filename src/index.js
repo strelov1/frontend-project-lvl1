@@ -1,5 +1,5 @@
 import promptly from 'promptly';
-import engine from './engine';
+import engine from './engine.js';
 
 export default async function createGame(gameName, question) {
   const cliEnv = {
