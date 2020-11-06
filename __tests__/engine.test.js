@@ -48,35 +48,35 @@ test('Success game', async (done) => {
   );
 });
 
-test('Failed game first step', async (done) => {
-  const userQuestion = jest.fn()
-    .mockResolvedValueOnce(['question', 'yes'])
-    .mockResolvedValueOnce(['question', 'yes'])
-    .mockResolvedValueOnce(['question', 'yes']);
+// test('Failed game first step', async (done) => {
+//   const userQuestion = jest.fn()
+//     .mockResolvedValueOnce(['question', 'yes'])
+//     .mockResolvedValueOnce(['question', 'yes'])
+//     .mockResolvedValueOnce(['question', 'yes']);
 
-  const userName = 'TestUSER2';
-  const gameName = 'Game Greeting!';
+//   const userName = 'TestUSER2';
+//   const gameName = 'Game Greeting!';
   
-  sendLine(userName);
-  sendLine('no');
+//   sendLine(userName);
+//   sendLine('no');
 
-  await runGame(
-      gameName,
-      userQuestion,
-      env,
-      {
-        onFinishGame: (user) => {
-          console.log('user', user)
-          expect(user).toBe(userName);
-          done(new Error('Игра не дождна была завершиться успехом'));
-        },
-        onFailGame: (user) => {
-          expect(user).toBe(userName);
-          done();
-        },
-      },
-  );
-});
+//   await runGame(
+//       gameName,
+//       userQuestion,
+//       env,
+//       {
+//         onFinishGame: (user) => {
+//           console.log('user', user)
+//           expect(user).toBe(userName);
+//           done(new Error('Игра не дождна была завершиться успехом'));
+//         },
+//         onFailGame: (user) => {
+//           expect(user).toBe(userName);
+//           done();
+//         },
+//       },
+//   );
+// });
 
 test('Failed game second step', async (done) => {
   const userQuestion = jest.fn()
