@@ -18,7 +18,4 @@ const games = {
 
 const game = games[number] || (() => alert('Игра не найдена'));
 
-const print = (message) => alert(message);
-const interact = (message) => prompt(message);
-
-game({ print, interact });
+game();

@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 import { jest, afterEach, expect } from '@jest/globals';
-import { env } from '../src/cli.js';
 import runGame from '../src/index.js';
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -28,11 +27,10 @@ test('Success game', async () => {
   sendLine('yes');
   sendLine('no');
   
-  await runGame(gameName, userQuestion, env);
+  await runGame(gameName, userQuestion);
 
   expect(console.log).toHaveBeenCalledWith('Welcome to the Brain Games!');
   expect(console.log).toHaveBeenCalledWith(`Congratulations, ${userName}!`);
-
 });
 
 test('Failed game first step', async () => {
@@ -47,7 +45,7 @@ test('Failed game first step', async () => {
   sendLine(userName);
   sendLine('no');
 
-  await runGame(gameName, userQuestion, env);
+  await runGame(gameName, userQuestion);
 
   expect(console.log).toHaveBeenCalledWith('Welcome to the Brain Games!');
   expect(console.log).toHaveBeenCalledWith(`Let's try again, ${userName}!`);
@@ -66,7 +64,7 @@ test('Failed game second step', async () => {
   sendLine('yes');
   sendLine('no');
   
-  await runGame(gameName, userQuestion, env);
+  await runGame(gameName, userQuestion);
   
   expect(console.log).toHaveBeenCalledWith('Welcome to the Brain Games!');
   expect(console.log).toHaveBeenCalledWith(`Let's try again, ${userName}!`);
@@ -86,7 +84,7 @@ test('Failed game last step', async () => {
     sendLine('yes');
     sendLine('no');
     
-    await runGame(gameName, userQuestion, env);
+    await runGame(gameName, userQuestion);
     
     expect(console.log).toHaveBeenCalledWith('Welcome to the Brain Games!');
     expect(console.log).toHaveBeenCalledWith(`Let's try again, ${userName}!`);

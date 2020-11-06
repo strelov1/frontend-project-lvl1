@@ -9,4 +9,4 @@ const question = async () => {
   return [num, isEven(num) ? 'yes' : 'no'];
 };
 
-export default (env) => createGame('Answer "yes" if the number is even, otherwise answer "no".', question, env);
+export default () => createGame('Answer "yes" if the number is even, otherwise answer "no".', question);

@@ -1,28 +1,34 @@
-const NUMBER_OF_STEP = 3;
+import engine from './engine.js';
 
-export default async function engine(gameName, question, env) {
-  await env.print('Welcome to the Brain Games!');
-  const userName = await env.interact('May I have your name?');
-  await env.print(`Hello, ${userName}!`);
+const isBrowser = () => {
+  try {
+    /* eslint-disable-next-line */
+    window;
+    return true;
+  } catch (e) {
+    //
+  }
+  return false;
+};
 
-  await env.print(gameName);
+export default async function createGame(gameName, question) {
+  if (!isBrowser()) {
+    /* eslint-disable-next-line */
+    const promptly = await import('promptly').then((module) => module.default);
+    const cliEnv = {
+      print: (message) => console.log(message),
+      interact: (message) => promptly.prompt(message),
+    };
 
-  /* eslint-disable no-await-in-loop */
-  for (let step = 0; step < NUMBER_OF_STEP; step += 1) {
-    const [gameQuestion, rightAnswer] = await question();
-
-    await env.print(`Question: ${gameQuestion}`);
-
-    const userAnswer = await env.interact('Your answer:');
-
-    if (rightAnswer === userAnswer) {
-      await env.print('Correct!');
-    } else {
-      await env.print(`'${userAnswer}' is wrong answer ;(. Correct answer was '${rightAnswer}'.`);
-      await env.print(`Let's try again, ${userName}!`);
-      return;
-    }
+    return engine(gameName, question, cliEnv);
   }
 
-  await env.print(`Congratulations, ${userName}!`);
+  const browserEnv = {
+    /* eslint-disable-next-line */
+    print: (message) => alert(message),
+    /* eslint-disable-next-line */
+    interact: (message) => prompt(message),
+  };
+
+  return engine(gameName, question, browserEnv);
 }
