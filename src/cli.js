@@ -1,7 +1,12 @@
 import promptly from 'promptly';
 
+export const env = {
+  print: (message) => console.log(message),
+  interact: (message) => promptly.prompt(message),
+};
+
 export default async () => {
-  console.log('Welcome to the Brain Games!');
-  const name = await promptly.prompt('May I have your name?');
-  console.log(`Hello, ${name}!`);
+  env.print('Welcome to the Brain Games!');
+  const name = await env.interact('May I have your name?');
+  env.print(`Hello, ${name}!`);
 };

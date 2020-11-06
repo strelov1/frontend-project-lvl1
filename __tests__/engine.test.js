@@ -1,14 +1,19 @@
 /* eslint-disable */
 
 import { jest, afterEach } from '@jest/globals';
+import { env } from '../src/cli.js';
 import runGame from '../src/index.js';
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(process.stdout, 'write').mockImplementation(() => {});
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
+const sendLine = (line) => {
+  setImmediate(() => process.stdin.emit('data', `${line}\n`));
+};
 
 test('Success game', async (done) => {
   const userQuestion = jest.fn()
@@ -16,26 +21,19 @@ test('Success game', async (done) => {
     .mockResolvedValueOnce(['question', 'yes'])
     .mockResolvedValueOnce(['question', 'no']);
 
-  const userAnswer = jest.fn()
-    .mockResolvedValueOnce('yes')
-    .mockResolvedValueOnce('yes')
-    .mockResolvedValueOnce('no');
-
   const userName = 'TestUser';
   const gameName = 'Game Greeting!';
+
+  sendLine(userName);
+  sendLine('yes');
+  sendLine('yes');
+  sendLine('no');
   
   await runGame(
       gameName,
       userQuestion,
+      env,
       {
-        greeting: async () => userName,
-        userAnswer: userAnswer,
-        onSuccessStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).toBe(rightAnswer);
-        },
-        onFailStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).not.toBe(rightAnswer);
-        }, 
         onFinishGame: (user) => {
           expect(user).toBe(userName);
           done();
@@ -54,27 +52,19 @@ test('Failed game first step', async (done) => {
     .mockResolvedValueOnce(['question', 'yes'])
     .mockResolvedValueOnce(['question', 'yes']);
 
-  const userAnswer = jest.fn()
-    .mockResolvedValueOnce('no')
-    .mockResolvedValueOnce('yes')
-    .mockResolvedValueOnce('yes');
-
   const userName = 'TestUSER2';
   const gameName = 'Game Greeting!';
- 
+  
+  sendLine(userName);
+  sendLine('no');
+
   await runGame(
       gameName,
       userQuestion,
+      env,
       {
-        greeting: async () => userName,
-        userAnswer: userAnswer,
-        onSuccessStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).toBe(rightAnswer);
-        },
-        onFailStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).not.toBe(rightAnswer);
-        }, 
         onFinishGame: (user) => {
+          console.log('user', user)
           expect(user).toBe(userName);
           done(new Error('Игра не дождна была завершиться успехом'));
         },
@@ -92,27 +82,20 @@ test('Failed game second step', async (done) => {
     .mockResolvedValueOnce(['question', 'yes'])
     .mockResolvedValueOnce(['question', 'yes']);
 
-  const userAnswer = jest.fn()
-    .mockResolvedValueOnce('yes')
-    .mockResolvedValueOnce('no')
-    .mockResolvedValueOnce('yes');
-
-  const userName = 'TestUSER3';
+  const userName = 'TestUSER2';
   const gameName = 'Game Greeting!';
- 
+  
+  sendLine(userName);
+  sendLine('yes');
+  sendLine('no');
+  
   await runGame(
       gameName,
       userQuestion,
+      env,
       {
-        greeting: async () => userName,
-        userAnswer: userAnswer,
-        onSuccessStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).toBe(rightAnswer);
-        },
-        onFailStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).not.toBe(rightAnswer);
-        }, 
         onFinishGame: (user) => {
+          console.log('user', user)
           expect(user).toBe(userName);
           done(new Error('Игра не дождна была завершиться успехом'));
         },
@@ -125,39 +108,33 @@ test('Failed game second step', async (done) => {
 });
 
 test('Failed game last step', async (done) => {
-  const userQuestion = jest.fn()
-    .mockResolvedValueOnce(['question', 'yes'])
-    .mockResolvedValueOnce(['question', 'yes'])
-    .mockResolvedValueOnce(['question', 'yes']);
+    const userQuestion = jest.fn()
+      .mockResolvedValueOnce(['question', 'yes'])
+      .mockResolvedValueOnce(['question', 'yes'])
+      .mockResolvedValueOnce(['question', 'yes']);
 
-  const userAnswer = jest.fn()
-    .mockResolvedValueOnce('yes')
-    .mockResolvedValueOnce('yes')
-    .mockResolvedValueOnce('no');
-
-  const userName = 'TestUSER3';
-  const gameName = 'Game Greeting!';
- 
-  await runGame(
-      gameName,
-      userQuestion,
-      {
-        greeting: async () => userName,
-        userAnswer: userAnswer,
-        onSuccessStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).toBe(rightAnswer);
+    const userName = 'TestUSER2';
+    const gameName = 'Game Greeting!';
+    
+    sendLine(userName);
+    sendLine('yes');
+    sendLine('yes');
+    sendLine('no');
+    
+    await runGame(
+        gameName,
+        userQuestion,
+        env,
+        {
+          onFinishGame: (user) => {
+            console.log('user', user)
+            expect(user).toBe(userName);
+            done(new Error('Игра не дождна была завершиться успехом'));
+          },
+          onFailGame: (user) => {
+            expect(user).toBe(userName);
+            done();
+          },
         },
-        onFailStep: (rightAnswer, userAnswer) => {
-          expect(userAnswer).not.toBe(rightAnswer);
-        }, 
-        onFinishGame: (user) => {
-          expect(user).toBe(userName);
-          done(new Error('Игра не дождна была завершиться успехом'));
-        },
-        onFailGame: (user) => {
-          expect(user).toBe(userName);
-          done();
-        },
-      },
-  );
+    );
 });
