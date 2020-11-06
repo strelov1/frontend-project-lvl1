@@ -6,14 +6,16 @@ import runGame from '../src/index.js';
 
 jest.spyOn(console, 'log').mockImplementation(() => {});
 jest.spyOn(process.stdout, 'write').mockImplementation(() => {});
+jest.spyOn(process.stdin, 'write').mockImplementation(() => {});
+
+const sendLine = (line) => {
+  setImmediate(() => process.stdin.emit('data', `${line}\n`));
+};
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-const sendLine = (line) => {
-  setImmediate(() => process.stdin.emit('data', `${line}\n`));
-};
 
 test('Success game', async (done) => {
   const userQuestion = jest.fn()
