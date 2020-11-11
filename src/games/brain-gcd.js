@@ -11,11 +11,14 @@ export const calculateGcd = (num1, num2) => {
   return 1;
 };
 
-const question = async () => {
+const userQuestion = async () => {
   const num1 = random(1, 10);
   const num2 = random(1, 10);
 
-  return [`${num1} ${num2}`, String(calculateGcd(num1, num2))];
+  const question = `${num1} ${num2}`;
+  const answer = String(calculateGcd(num1, num2));
+
+  return [question, answer];
 };
 
-export default () => createGame('Find the greatest common divisor of given numbers.', question);
+export default () => createGame('Find the greatest common divisor of given numbers.', userQuestion);

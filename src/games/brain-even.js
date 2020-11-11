@@ -3,10 +3,11 @@ import createGame from '../index.js';
 
 export const isEven = (num) => num % 2 === 0;
 
-const question = async () => {
-  const num = random(1, 100);
+const userQuestion = async () => {
+  const question = random(1, 100);
+  const answer = isEven(question) ? 'yes' : 'no';
 
-  return [num, isEven(num) ? 'yes' : 'no'];
+  return [question, answer];
 };
 
-export default () => createGame('Answer "yes" if the number is even, otherwise answer "no".', question);
+export default () => createGame('Answer "yes" if the number is even, otherwise answer "no".', userQuestion);

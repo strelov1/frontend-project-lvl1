@@ -16,7 +16,7 @@ export const generateProgressions = (start, length, step) => {
   return progression;
 };
 
-const question = async () => {
+const userQuestion = async () => {
   const start = random(1, 10);
   const length = random(5, 10);
   const step = random(1, 10);
@@ -26,7 +26,10 @@ const question = async () => {
   const element = getRandomElement(progression);
   const replacedProgression = arrayReplaceValue(progression, element, '..');
 
-  return [replacedProgression.join(' '), String(element)];
+  const question = replacedProgression.join(' ');
+  const answer = String(element);
+
+  return [question, answer];
 };
 
-export default () => createGame('What number is missing in the progression?', question);
+export default () => createGame('What number is missing in the progression?', userQuestion);

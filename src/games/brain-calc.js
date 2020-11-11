@@ -16,12 +16,15 @@ export const calculate = (num1, num2, operation) => {
   }
 };
 
-const question = async () => {
+const userQuestion = async () => {
   const num1 = random(1, 10);
   const num2 = random(1, 10);
   const operation = generateRandomOperation();
 
-  return [`${num1} ${operation} ${num2}`, String(calculate(num1, num2, operation))];
+  const question = `${num1} ${operation} ${num2}`;
+  const answer = String(calculate(num1, num2, operation));
+
+  return [question, answer];
 };
 
-export default () => createGame('What is the result of the expression?', question);
+export default () => createGame('What is the result of the expression?', userQuestion);

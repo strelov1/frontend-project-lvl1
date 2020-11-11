@@ -12,10 +12,11 @@ export const isPrime = (num) => {
     .every((item) => (num % item !== 0));
 };
 
-const question = async () => {
-  const num = random(1, 100);
+const userQuestion = async () => {
+  const question = random(1, 100);
+  const answer = isPrime(question) ? 'yes' : 'no';
 
-  return [num, isPrime(num) ? 'yes' : 'no'];
+  return [question, answer];
 };
 
-export default () => createGame('Answer "yes" if given number is prime. Otherwise answer "no".', question);
+export default () => createGame('Answer "yes" if given number is prime. Otherwise answer "no".', userQuestion);
