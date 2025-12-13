@@ -2,14 +2,15 @@ import { random, range } from '../utils.js';
 import createGame from '../index.js';
 
 export const isPrime = (num) => {
-  if (num <= 1) {
-    return false;
+  if (num <= 1) return false;
+  if (num <= 3) return true;
+  if (num % 2 === 0) return false;
+
+  const limit = Math.sqrt(num);
+  for (let i = 3; i < limit; i += 2) {
+    if (num % i === 0) return false;
   }
-  if (num <= 3) {
-    return true;
-  }
-  return range(2, num / 2)
-    .every((item) => (num % item !== 0));
+  return true;
 };
 
 const userQuestion = async () => {

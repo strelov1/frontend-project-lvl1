@@ -1,15 +1,8 @@
 import { random } from '../utils.js';
 import createGame from '../index.js';
 
-export const calculateGcd = (num1, num2) => {
-  const max = Math.max(num1, num2);
-  for (let divider = max; divider > 0; divider -= 1) {
-    if (num1 % divider === 0 && num2 % divider === 0) {
-      return divider;
-    }
-  }
-  return 1;
-};
+// Euclidean algorithm for GCD
+export const calculateGcd = (a, b) => (b === 0 ? a : calculateGcd(b, a % b));
 
 const userQuestion = async () => {
   const num1 = random(1, 10);

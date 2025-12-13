@@ -6,15 +6,9 @@ export const arrayReplaceValue = (array, searchValue, replaceValue) => {
   return array.map((item) => (item === searchValue ? replaceValue : item));
 };
 
-export const generateProgressions = (start, length, step) => {
-  const progression = [];
-  let incrment = start;
-  for (let i = 0; i < length; i += 1) {
-    progression.push(incrment);
-    incrment += step;
-  }
-  return progression;
-};
+export const generateProgressions = (start, length, step) => (
+  Array.from({ length }, (_, i) => start + i * step)
+);
 
 const userQuestion = async () => {
   const start = random(1, 10);
